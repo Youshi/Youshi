@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top_1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#1595e6"
+        android:fitsSystemWindows="true"
+        android:gravity="clip_vertical">
+
+        <TextView
+            android:id="@+id/title_top_lg"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="8"
+            android:singleLine="true"
+            android:text="登录账号"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="京西票号客户管理系统"
+                android:textColor="#1595e6"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_uplayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearlayout1"
+            android:layout_margin="@dimen/dimen20"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:background="@drawable/corner_login_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="账号"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:id="@+id/lg_username"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="请输入账号"
+                        android:paddingLeft="@dimen/dimen10"
+                        android:textSize="14sp" />
+                    <!--<ImageView-->
+                        <!--android:id="@+id/login_history"-->
+                        <!--android:padding="@dimen/dimen10"-->
+                        <!--android:src="@mipmap/fff"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"></ImageView>-->
+
+                </LinearLayout>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e6e6e5" />
+
+                <LinearLayout
+                    android:id="@+id/ep_password_tl"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="密码"
+                        android:textSize="17sp" />
+
+
+                    <EditText
+                        android:id="@+id/ps_password_lg"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="请输入密码"
+                        android:inputType="textPassword"
+                        android:paddingLeft="@dimen/dimen10"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <Button
+                android:padding="@dimen/dimen15"
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginTop="@dimen/dimen30"
+                android:background="@drawable/corner1"
+                android:text="确认登录"
+                android:textColor="#fff"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_weight="2"-->
+                <!--android:gravity="center|left"-->
+                <!--android:layout_marginLeft="5dp"-->
+                <!--&gt;-->
+                <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/vip_check"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:button="@drawable/select_checkbox"&ndash;&gt;-->
+                    <!--&lt;!&ndash;/>&ndash;&gt;-->
+                <!--&lt;!&ndash;android:button="@null"&ndash;&gt;-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:text="保存密码"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

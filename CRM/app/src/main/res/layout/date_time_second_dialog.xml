@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    	<DatePicker
+            android:id="@+id/dateTimeSecondDialogDatePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+        <TimePicker
+            android:id="@+id/dateTimeSecondDialogTimePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_marginTop="5dp"
+		    android:gravity="center"
+		    android:orientation="horizontal" >
+			<Button
+	            android:id="@+id/secondMinusButton"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/minus_symbol_state" />
+			<EditText
+			    android:id="@+id/secondEditText"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:background="@drawable/date"
+			    android:gravity="center"
+			    android:inputType="number"
+			    android:singleLine="true"
+			    android:enabled="false"
+			    android:textSize="25sp" />
+	
+	        <Button
+	            android:id="@+id/secondAddButton"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/add_symbol_state" />
+    </LinearLayout>
+</LinearLayout>

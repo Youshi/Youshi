@@ -1,0 +1,216 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.hmqqg.hm.fragment.HomeFragment">
+
+    <include
+        android:fitsSystemWindows="true"
+        android:id="@+id/top_1"
+        layout="@layout/top_home_linkman" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_module3"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:clickable="true"-->
+            <!--android:orientation="vertical"-->
+            <!--&gt;-->
+            <!--<LinearLayout-->
+                <!--android:id="@+id/entryt"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_gravity="center|left"-->
+                <!--&gt;-->
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@mipmap/dial1"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="组织架构"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:textColor="#676767" />-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e9e8e8"/>
+        <LinearLayout
+            android:id="@+id/ll_module1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:id="@+id/entry"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center|left"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/friends2"
+                    android:layout_gravity="center"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                <TextView
+                    android:id="@+id/tv_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="申请与通知"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#676767"
+                    android:layout_centerVertical="true"
+                    />
+                    <ImageView
+                        android:id="@+id/unread_msg_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_message"
+                        android:gravity="center"
+                        android:src="@mipmap/red_mesa"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center|right"
+                >
+                <!--<TextView-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:id="@+id/unread_msg_number"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:background="@mipmap/message_red"-->
+                    <!--android:gravity="center"-->
+                    <!--android:visibility="invisible"-->
+                    <!--android:textSize="5sp" />-->
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e9e8e8"/>
+
+            <LinearLayout
+                android:id="@+id/ll_module2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:id="@+id/group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center|left"
+                    >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/friends2"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="群聊天"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#676767" />
+                </LinearLayout>
+            </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#e9e8e8"></FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#e4e4e4"></FrameLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#fff">-->
+
+            <!--<com.example.hmqqg.hm.widgets.AnimatedExpandableListView-->
+                <!--android:id="@+id/listView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:groupIndicator="@null" />-->
+        <!--</LinearLayout>-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_module2"
+            >
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:cacheColorHint="#00000000"
+                android:descendantFocusability="afterDescendants"
+                android:divider="@color/divider_list"
+                android:dividerHeight="1px"
+                android:fastScrollEnabled="false" />
+            <com.example.hmqqg.hm.ui.LetterIndexView
+                android:id="@+id/sidebar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/transparent"
+                android:clickable="true" />
+            <TextView
+                android:id="@+id/show_letter_in_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/voip_toast_bg"
+                android:gravity="center"
+                android:visibility="gone"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

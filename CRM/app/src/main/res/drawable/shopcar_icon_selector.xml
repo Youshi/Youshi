@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:drawable="@mipmap/write1" />-->
+    <!--<item android:drawable="@mipmap/write" />-->
+    <item android:drawable="@mipmap/management1" />
+    <item android:drawable="@mipmap/management2" />
+</transition>

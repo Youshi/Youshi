@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+	<declare-styleable name="DateTimeRangeView">   
+        <attr name="timeformat">
+           <enum name="YEAR_MONTH_DAY_HOUR_MINUTE" value="0"/>
+           <enum name="YEAR_MONTH_DAY_HOUR_MINUTE_24" value="1"/> 
+           <enum name="YEAR_MONTH_DAY" value="2"/>
+           <enum name="YEAR_MONTH" value="3"/>
+           <enum name="HOUR_MINUTE" value="4"/>
+           <enum name="YEAR_MONTH_DAY_HOUR_MINUTE_SECOND" value="5"/>
+        </attr> 
+        <attr name="startText" format="string" />   
+        <attr name="endText" format="string" />  
+        <attr name="contentView" format="integer" />
+		<attr name="startDateEditRid" format="integer" />
+		<attr name="endDateEditRid" format="integer" />
+    </declare-styleable> 
+     <declare-styleable name="RoundedImageView">
+        <attr name="corner_radius" format="dimension" />
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="mutate_background" format="boolean" />
+        <attr name="oval" format="boolean" />
+        <attr name="android:scaleType" />
+    </declare-styleable>
+	 <declare-styleable name="TabView">   
+        <attr name="tabloc">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>   
+        </attr>
+    </declare-styleable>
+    
+	 <declare-styleable name="LoginView">
+	     <attr name="view" format="integer"/>
+	 </declare-styleable>
+     
+	 <declare-styleable name="HttpImageView">
+	     <attr name="default_drawable" format="reference" />
+	 </declare-styleable>
+	 
+	 <declare-styleable name="IndexListView">
+	     <attr name="index_fontsize" format="reference|integer" />
+	 </declare-styleable>
+	 
+	 <declare-styleable name="PagerBarView">
+	    <attr name="contentViewResourceId" format="integer" />
+	</declare-styleable>
+	<declare-styleable name="CalendarView">
+	    <attr name="item_default_background" format="reference|color" />
+	    <attr name="item_selected_background" format="reference|color" />
+	    <attr name="item_today_background" format="reference|color" />
+	    <attr name="weekHeadBackground" format="reference|color"/>
+	    <attr name="headBackground" format="reference|color"/>
+	    <attr name="item_overtime_selected" format="boolean"/>
+	    <attr name="item_futuretime_selected" format="boolean"/>
+	    <attr name="can_click_next_month" format="boolean"/>
+	</declare-styleable>
+	<declare-styleable name="CustomBallView">
+	    <attr name="value_color" format="reference|color" />
+	    <attr name="value_color2" format="reference|color" />
+	    <attr name="font_color" format="reference|color" />
+	    <attr name="have_animation" format="boolean"/>
+	    <attr name="color_mode" format="reference|integer" />
+	</declare-styleable>
+	 <item type="id" name="pager_view"/>
+     <item type="id" name="pager_view_tab"/>
+       <item type="id" name="decode"/>
+       
+       <!-- 条形码扫描使用到 -->
+	  <item type="id" name="decode_failed"/>
+	  <item type="id" name="decode_succeeded"/>
+	  <item type="id" name="launch_product_query"/>
+	  <item type="id" name="quit"/>
+	  <item type="id" name="restart_preview"/>
+	  <item type="id" name="return_scan_result"/>
+	  <item type="id" name="grid_view"/>
+	  <item type="id" name="list_item_comp_image"/>
+	  <item type="id" name="list_item_comp_title"/>
+	  <item type="id" name="list_item_comp_detail"/>
+</resources>

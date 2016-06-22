@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:drawable="@mipmap/lanselianxiren1" />-->
+    <!--<item android:drawable="@mipmap/lanselianxiren" />-->
+    <item android:drawable="@mipmap/contacts1" />
+    <item android:drawable="@mipmap/contacts2" />
+</transition>

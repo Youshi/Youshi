@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="plan">
+        <item >有意向</item>
+        <item >拒绝</item>
+        <item >同意</item>
+        <item >其他</item>
+    </string-array>
+
+    <string-array name="vacate_spinner">
+        <item>请假单</item>
+        <item>外出单</item>
+        <item>调休单</item>
+        <item>升职单</item>
+        <item>降职单</item>
+    </string-array>
+    <string-array name="customer_sex">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+    <string-array name="certificate_type">
+        <item>身份证</item>
+        <item>驾驶证</item>
+        <item>军官证</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="client_source">
+        <item>讲座</item>
+        <item>陌电</item>
+        <item>发单</item>
+        <item>答谢会</item>
+        <item>转介绍</item>
+        <item>社区活动</item>
+        <item>渠道</item>
+        <item>自有资源</item>
+        <item>其他途径</item>
+    </string-array>
+    <string-array name="usersort">
+        <item>意向</item>
+        <item>普通</item>
+        <item>关单</item>
+        <item>代理</item>
+        <item>合作</item>
+        <item>失效</item>
+    </string-array>
+    <string-array name="purpose">
+        <item>强烈</item>
+        <item>很强烈</item>
+        <item>一般</item>
+        <item>无意向</item>
+    </string-array>
+    <string-array name="invest">
+        <item>低(50万以下)</item>
+        <item>中(50万-200万)</item>
+        <item>高(200万-500万)</item>
+        <item>较高(500万以上)</item>
+    </string-array>
+    <string-array name="marriage">
+        <item>已婚</item>
+        <item>未婚</item>
+        <item>离异</item>
+        <item>垂偶</item>
+    </string-array>
+    <string-array name="activity">
+        <item>促销活动</item>
+        <item>网络搜索引擎</item>
+        <item>广告/邮寄/信函/简讯</item>
+        <item>讨论会/活动/展销</item>
+        <item>宣传/录影/录像/光盘</item>
+        <item>技术培训</item>
+        <item>销售训练</item>
+        <item>其他活动</item>
+    </string-array>
+    <string-array name="invest_type">
+        <item>收益型</item>
+        <item>成长型</item>
+        <item>平衡型</item>
+    </string-array>
+    <string-array name="invest_period_array">
+        <item>周</item>
+        <item>月</item>
+        <item>季</item>
+        <item>半年</item>
+        <item>年</item>
+    </string-array>
+    <string-array name="guanxi">
+        <item>朋友</item>
+        <item>家人</item>
+    </string-array>
+
+    <string-array name="profession_array">
+        <item>工业</item>
+        <item>服务业</item>
+        <item>餐饮业</item>
+        <item>通讯</item>
+        <item>邮电</item>
+        <item>社区服务</item>
+        <item>批发零售</item>
+    </string-array>
+
+    <string-array name="leaveadd">
+        <item>事假</item>
+        <item>病假</item>
+        <item>婚假</item>
+        <item>产假</item>
+    </string-array>
+
+    <string-array name="department">
+        <item>开发部</item>
+        <item>技术部</item>
+        <item>销售部</item>
+        <item>啦啦啦</item>
+    </string-array>
+    <string-array name="outalone_array">
+        <item>客户要约</item>
+        <item>客户拜访</item>
+    </string-array>
+    <string-array name="approver_array">
+        <item>请选择上级审批人</item>
+    </string-array>
+</resources>

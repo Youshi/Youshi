@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <include
+        android:id="@+id/top_1"
+        layout="@layout/top_back"
+        />
+
+        <LinearLayout
+            android:id="@+id/linear_find"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/corner_text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            >
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/top_nav_rearch"
+                />
+            <EditText
+                android:id="@+id/ed_find_client"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:hint="查找客户信息"
+                android:background="@null"
+                />
+        </LinearLayout>
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/lstv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.handmark.pulltorefresh.library.PullToRefreshListView>
+</LinearLayout>

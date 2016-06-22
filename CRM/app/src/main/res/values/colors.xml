@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ff4081</color>
+
+    <color name="orange">#FF9900</color>
+    <color name="green">#009900</color>
+    <color name="green2">#45b913</color>
+    <color name="blue">#000099</color>
+    <color name="gray">#aeacac</color>
+    <color name="white">#fcfbfb</color>
+    <color name="pressed_color">#8fcfdc</color>
+    <color name="statusbar_bg">#229aee</color>
+    <color name="statusbar_bg2">#1595e6</color>
+    <color name="nomal_color">#229aee</color>
+    <color name="red">#e6070e</color>
+    <color name="black">#0a0909</color>
+    <color name="tint_gray">#d2d2d2</color>
+
+
+
+
+</resources>

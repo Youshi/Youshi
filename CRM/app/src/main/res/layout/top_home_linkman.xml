@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/top_1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/statusbar_bg"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/image_location"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/iconfont_dizhi"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="烟台"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:layout_toRightOf="@+id/image_location"
+            android:layout_gravity="center"
+            android:paddingLeft="5dp"
+            />
+        <TextView
+            android:id="@+id/title_top_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxEms="8"
+            android:text="联系人"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/add"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

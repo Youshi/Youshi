@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <include
+
+        layout="@layout/top_location"></include>
+
+
+    <LinearLayout
+        android:background="#e9edf1"
+        android:padding="@dimen/dimen10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+      <RelativeLayout
+          android:gravity="center_vertical"
+          android:background="@drawable/shape_search"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <ImageView
+              android:layout_marginLeft="@dimen/dimen15"
+              android:id="@+id/iv_search"
+              android:padding="@dimen/dimen10"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:src="@mipmap/abc_ic_search_api_holo_light"/>
+          <EditText
+              android:layout_marginLeft="@dimen/dimen5"
+              android:id="@+id/et_keyword"
+              android:layout_centerVertical="true"
+              android:hint="搜索附近的公司、写字楼"
+              android:paddingRight="@dimen/dimen10"
+              android:background="@null"
+              android:layout_toRightOf="@id/iv_search"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"/>
+      </RelativeLayout>
+
+    </LinearLayout>
+    <com.example.hmqqg.hm.view.PercentLinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_heightPercent="50%">
+
+
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/bmapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:background="#d6b2b2"
+            app:layout_heightPercent="10%"
+            android:text="sdfsd"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/text_Info"/>
+        <ListView
+            android:id="@+id/listview"
+            app:layout_heightPercent="50%"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></ListView>
+
+    </com.example.hmqqg.hm.view.PercentLinearLayout>
+
+</LinearLayout>
