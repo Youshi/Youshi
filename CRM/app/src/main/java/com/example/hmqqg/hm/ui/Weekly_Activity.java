@@ -211,30 +211,63 @@ public class Weekly_Activity extends BaseRequestActivity implements View.OnClick
                 requestParams.addBodyParameter("operateby",OperateBy);//审核人
                 requestParams.addBodyParameter("NextWork",Scondition3);//次日工作计划
                 requestParams.addBodyParameter("userId",MyApplication.getInstance().getUserInfo().getUserId());
-                x.http().request(HttpMethod.POST,requestParams,new MyCommonCallStringRequest(new AddjobEntity()));
+//                x.http().request(HttpMethod.POST,requestParams,new MyCommonCallStringRequest(new AddjobEntity()));
+                x.http().post(requestParams, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        pd.dismiss();
+                        Gson gson = new Gson();
+                        AddjobEntity addentity =gson.fromJson(result,AddjobEntity.class);
+                        String str = addentity.getStatus().get(0).getStaval();
+                        if("1".equals(str)){
+                            Toast.makeText(Weekly_Activity.this,"保存成功",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Weekly_Activity.this,Joblogging_Activity.class);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Toast.makeText(Weekly_Activity.this,"保存失败",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                        pd.dismiss();
+                        Toast.makeText(Weekly_Activity.this,R.string.ToastString,Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
             }
         }).start();
     }
     @Subscribe(threadMode = ThreadMode.MainThread)
     @Override
     public void onRequestSuccess(Object object) {
-        pd.dismiss();
-        AddjobEntity l = (AddjobEntity) object;
-        String str = l.getStatus().get(0).getStaval();
-        if(str.equals("1")){
-            Toast.makeText(this,"保存成功",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this,Joblogging_Activity.class);
-            startActivity(intent);
-            finish();
-        }else{
-            Toast.makeText(this,"保存失败",Toast.LENGTH_SHORT).show();
-        }
+//        pd.dismiss();
+//        AddjobEntity l = (AddjobEntity) object;
+//        String str = l.getStatus().get(0).getStaval();
+//        if(str.equals("1")){
+//            Toast.makeText(this,"保存成功",Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(this,Joblogging_Activity.class);
+//            startActivity(intent);
+//            finish();
+//        }else{
+//            Toast.makeText(this,"保存失败",Toast.LENGTH_SHORT).show();
+//        }
     }
     @Subscribe(threadMode = ThreadMode.MainThread)
     @Override
     public void onRequestError(Throwable ex) {
-        pd.dismiss();
-        Toast.makeText(this,R.string.ToastString,Toast.LENGTH_SHORT).show();
+//        pd.dismiss();
+//        Toast.makeText(this,R.string.ToastString,Toast.LENGTH_SHORT).show();
     }
     private void gethttpspi() {
         new Thread(new Runnable() {

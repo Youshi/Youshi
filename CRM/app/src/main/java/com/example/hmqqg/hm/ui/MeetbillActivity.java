@@ -170,12 +170,11 @@ public class MeetbillActivity extends BaseRequestActivity implements View.OnClic
         timePicker.setIs24HourView(true);
         timePicker.setOnTimeChangedListener(MeetbillActivity.this);
 
-        ad = new android.app.AlertDialog.Builder(MeetbillActivity.this)
+        ad = new AlertDialog.Builder(MeetbillActivity.this)
                 .setTitle(initDateTime)
                 .setView(dateTimeLayout)
                 .setPositiveButton("设置", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        onDateChanged(null, 0, 0, 0);
                         inputDate.setText(sTime);
                         gettime();
 
@@ -186,6 +185,7 @@ public class MeetbillActivity extends BaseRequestActivity implements View.OnClic
                         inputDate.setText("");
                     }
                 }).show();
+        onDateChanged(null, 0, 0, 0);
         return ad;
     }
 
@@ -229,17 +229,6 @@ public class MeetbillActivity extends BaseRequestActivity implements View.OnClic
             Toast.makeText(MeetbillActivity.this, "请输入结束时间", Toast.LENGTH_SHORT).show();
             return;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        try {
-            long Startimes = sdf.parse(starttime).getTime();
-            long endtimes = sdf.parse(endtime).getTime();
-            if(Startimes>endtimes){
-                Toast.makeText(MeetbillActivity.this, "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         if ("".equals(Smminute) || Smminute == null) {
             Toast.makeText(MeetbillActivity.this, "请输入合计时间", Toast.LENGTH_SHORT).show();
             return;
@@ -276,7 +265,37 @@ public class MeetbillActivity extends BaseRequestActivity implements View.OnClic
                 requestParams.addBodyParameter("AppReason", Syuanyin);
                 requestParams.addBodyParameter("OperateBy", OperateBy);
                 requestParams.addBodyParameter("CreatedBy", str);
-                x.http().request(HttpMethod.POST, requestParams, new MyCommonCallStringRequest(new MeetEntity()));
+//                x.http().request(HttpMethod.POST, requestParams, new MyCommonCallStringRequest(new MeetEntity()));
+                x.http().post(requestParams, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Gson gson = new Gson();
+                        MeetEntity meetentity = gson.fromJson(result,MeetEntity.class);
+                        pd.dismiss();
+                        if ("1".equals(meetentity.getStatus().get(0).getStaval())) {
+                            Toast.makeText(MeetbillActivity.this, "保存成功!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(MeetbillActivity.this, "保存失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                        pd.dismiss();
+                        Toast.makeText(MeetbillActivity.this, getResources().getString(R.string.ToastString), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
             }
         }).start();
     }
@@ -284,21 +303,21 @@ public class MeetbillActivity extends BaseRequestActivity implements View.OnClic
     @Subscribe(threadMode = ThreadMode.MainThread)
     @Override
     public void onRequestSuccess(Object object) {
-        MeetEntity ac = (MeetEntity) object;
-        pd.dismiss();
-        if ("1".equals(ac.getStatus().get(0).getStaval())) {
-            Toast.makeText(MeetbillActivity.this, "保存成功~", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            Toast.makeText(MeetbillActivity.this, "保存失败，请稍后重试！", Toast.LENGTH_SHORT).show();
-        }
+//        MeetEntity ac = (MeetEntity) object;
+//        pd.dismiss();
+//        if ("1".equals(ac.getStatus().get(0).getStaval())) {
+//            Toast.makeText(MeetbillActivity.this, "保存成功~", Toast.LENGTH_SHORT).show();
+//            finish();
+//        } else {
+//            Toast.makeText(MeetbillActivity.this, "保存失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Subscribe(threadMode = ThreadMode.MainThread)
     @Override
     public void onRequestError(Throwable ex) {
-        pd.dismiss();
-        Toast.makeText(MeetbillActivity.this, "您的网络不稳定，请稍后重试！", Toast.LENGTH_SHORT).show();
+//        pd.dismiss();
+//        Toast.makeText(MeetbillActivity.this, "您的网络不稳定，请稍后重试！", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -400,11 +419,11 @@ public class MeetbillActivity extends BaseRequestActivity implements View.OnClic
             }
         }
     }
-    @Override
+
     public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
         onDateChanged(null, 0, 0, 0);
     }
-    @Override
+
     public void onDateChanged(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
         // 获得日历实例

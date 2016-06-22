@@ -63,7 +63,7 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
     private TextView mEdit_hours;//时长 小时
     private EditText mEdit_absence_cause;//外出事由
     private Spinner Operate;//审核人
-    private com.example.hmqqg.hm.ui.ScrovllViewForDate scroll_datetime;//时间选择器的Scrollview
+    private ScrovllViewForDate scroll_datetime;//时间选择器的Scrollview
     private List<String> mAppList = new ArrayList<String>();
     private List<OperateByEntity.DetailInfoEntity> List = new ArrayList<OperateByEntity.DetailInfoEntity>();
     OperateByEntity.DetailInfoEntity ob;
@@ -132,6 +132,7 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
                 onBackPressed();
                 break;
             case R.id.save:
+                progressD();
                 getDetails();//获取录入内容
                 break;
         }
@@ -145,7 +146,6 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
         strdays = mEdit_days.getText().toString();
         strhours = mEdit_hours.getText().toString();
         strAbsence_cause = mEdit_absence_cause.getText().toString();
-
         if ("".equals(strTitle) || strTitle == null) {
             Toast.makeText(OutbillActivity.this, "标题不能为空", Toast.LENGTH_SHORT).show();
             return;
@@ -157,17 +157,6 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
         if ("".equals(strEndtime) || strEndtime == null) {
             Toast.makeText(OutbillActivity.this, "结束时间不能为空", Toast.LENGTH_SHORT).show();
             return;
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        try {
-            long Startime = sdf.parse(strStartime).getTime();
-            long endtime = sdf.parse(strEndtime).getTime();
-            if(Startime>endtime){
-                Toast.makeText(OutbillActivity.this, "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
         if (("".equals(strdays) || strdays == null) && ("".equals(strhours) || strhours == null)) {
             Toast.makeText(OutbillActivity.this, "时长不能为空", Toast.LENGTH_SHORT).show();
@@ -183,9 +172,9 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
             Toast.makeText(OutbillActivity.this, "外出事由超出字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
-        progressD();
         getHttp();
     }
+
     private void getHttp() {
         new Thread(new Runnable() {
             @Override
@@ -204,7 +193,38 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
                 params.addBodyParameter("Days", strdays);
                 params.addBodyParameter("Hours", strhours);
                 params.addBodyParameter("AppReason", strAbsence_cause);
-                x.http().request(HttpMethod.POST, params, new MyCommonCallStringRequest(new LoginEntity()));
+//                x.http().request(HttpMethod.POST, params, new MyCommonCallStringRequest(new LoginEntity()));
+                x.http().post(params, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        pd.dismiss();
+                        Gson gson = new Gson();
+                        LoginEntity entity = gson.fromJson(result,LoginEntity.class);
+                        String isSuccess = entity.getStatus().get(0).getStaval().toString();
+                        if ("1".equals(isSuccess)) {
+                            Toast.makeText(OutbillActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else if ("0".equals(isSuccess)) {
+                            Toast.makeText(OutbillActivity.this, "提交失败,请稍后重试！", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                        pd.dismiss();
+                        Toast.makeText(OutbillActivity.this, "您的网络不稳定，请稍后重试！", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
             }
         }).start();
     }
@@ -212,39 +232,39 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
     @Subscribe(threadMode = ThreadMode.MainThread)
     @Override
     public void onRequestSuccess(Object object) {
-        LoginEntity statu = (LoginEntity) object;
-        String isSuccess = statu.getStatus().get(0).getStaval().toString();
-        pd.dismiss();
-        if ("1".equals(isSuccess)) {
-            Toast.makeText(OutbillActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
-            finish();
-        } else if ("0".equals(isSuccess)) {
-            Toast.makeText(OutbillActivity.this, "提交失败,请稍后重试！", Toast.LENGTH_SHORT).show();
-        }
+//        LoginEntity statu = (LoginEntity) object;
+//        String isSuccess = statu.getStatus().get(0).getStaval().toString();
+//        pd.dismiss();
+//        if ("1".equals(isSuccess)) {
+//            Toast.makeText(OutbillActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+//            finish();
+//        } else if ("0".equals(isSuccess)) {
+//            Toast.makeText(OutbillActivity.this, "提交失败,请稍后重试！", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Subscribe(threadMode = ThreadMode.MainThread)
     @Override
     public void onRequestError(Throwable ex) {
-        pd.dismiss();
-        Toast.makeText(OutbillActivity.this, "您的网络不稳定，请稍后重试！", Toast.LENGTH_SHORT).show();
+//        pd.dismiss();
+//        Toast.makeText(OutbillActivity.this, "您的网络不稳定，请稍后重试！", Toast.LENGTH_SHORT).show();
     }
 
-    public android.app.AlertDialog dateTimePicKDialog(final TextView inputDate) {
+    public AlertDialog dateTimePicKDialog(final TextView inputDate) {
         LinearLayout dateTimeLayout = (LinearLayout) OutbillActivity.this
                 .getLayoutInflater().inflate(R.layout.common_datetime, null);
         datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
         timePicker = (TimePicker) dateTimeLayout.findViewById(R.id.timepicker);
-        scroll_datetime = (com.example.hmqqg.hm.ui.ScrovllViewForDate) findViewById(R.id.scroll_datetime);
+        scroll_datetime = (ScrovllViewForDate) findViewById(R.id.scroll_datetime);
         init(datePicker, timePicker);
         timePicker.setIs24HourView(true);
         timePicker.setOnTimeChangedListener(OutbillActivity.this);
-        ad = new android.app.AlertDialog.Builder(OutbillActivity.this)
+
+        ad = new AlertDialog.Builder(OutbillActivity.this)
                 .setTitle(initDateTime)
                 .setView(dateTimeLayout)
                 .setPositiveButton("设置", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        onDateChanged(null, 0, 0, 0);
                         inputDate.setText(sTime);
                         gettime();
                     }
@@ -254,6 +274,7 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
                         inputDate.setText("");
                     }
                 }).show();
+        onDateChanged(null, 0, 0, 0);
         return ad;
     }
 
@@ -322,12 +343,10 @@ public class OutbillActivity extends BaseRequestActivity implements View.OnClick
         return result;
     }
 
-    @Override
     public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
         onDateChanged(null, 0, 0, 0);
     }
 
-    @Override
     public void onDateChanged(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
         // 获得日历实例
