@@ -57,6 +57,7 @@ public class Person_details extends BaseRequestActivity implements View.OnClickL
     private String Address;
     private String image;
     private String str;
+    private boolean isShow = true;
     // End Of Content View Elements
 
 
@@ -170,7 +171,11 @@ public class Person_details extends BaseRequestActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-        getdetails();
+        if(!isShow){
+            getdetails();
+        }
+        isShow=false;
+
     }
 
     public void getdetails() {
