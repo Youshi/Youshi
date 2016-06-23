@@ -35,6 +35,8 @@ import com.example.hmqqg.hm.entity.OperateByEntity;
 import com.example.hmqqg.hm.util.http.MyCommonCallStringRequest;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.xutils.common.Callback;
 import org.xutils.http.HttpMethod;
 import org.xutils.http.RequestParams;
@@ -84,9 +86,9 @@ public class Weekly_Activity extends BaseRequestActivity implements View.OnClick
     private String Strapprover;
     private String OperateBy;
     private ArrayAdapter<String> approverAdapter;//系统默认adapter
-    private List<String> approverList;//审核人的列表List
-    private List<OperateByEntity.DetailInfoEntity> List = new ArrayList<OperateByEntity.DetailInfoEntity>();
-    OperateByEntity.DetailInfoEntity op;
+    private List<String> mAppList = new ArrayList<String>();;//审核人的列表List
+    private List<OperateByEntity.DetailInfoEntity> approverList = new ArrayList<OperateByEntity.DetailInfoEntity>();
+    OperateByEntity.DetailInfoEntity ob;
     private int year;
     private int month;
     private int week;
@@ -124,9 +126,7 @@ public class Weekly_Activity extends BaseRequestActivity implements View.OnClick
         condition3 = (EditText) findViewById(R.id.condition3);
         spi_approver = (Spinner) findViewById(R.id.spi_approver);
         approverList = new ArrayList<>();
-        approverAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,approverList);
-        //设置下拉风格
-        approverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spi_approver.setAdapter(approverAdapter);
         title_top_bar.setText("工作记录录入");
         back.setOnClickListener(this);
@@ -189,7 +189,7 @@ public class Weekly_Activity extends BaseRequestActivity implements View.OnClick
             Toast.makeText(Weekly_Activity.this, "次日工作安排超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
-        if("请选择上级审核人".equals(Strapprover)){
+        if("请选择审核人".equals(Strapprover)){
             Toast.makeText(Weekly_Activity.this, "请选择审核人", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -279,40 +279,55 @@ public class Weekly_Activity extends BaseRequestActivity implements View.OnClick
                 x.http().post(requestParams, new Callback.CommonCallback<String>() {
                     @Override
                     public void onSuccess(String result) {
-                        Gson gson = new Gson();
-                        OperateByEntity opby =gson.fromJson(result,OperateByEntity.class);
-                        OperateByEntity.DetailInfoEntity opera =gson.fromJson(result,OperateByEntity.DetailInfoEntity.class);
-                        String stave = opby.getStatus().get(0).getStaval().toString();
-                        if("1".equals(stave)){
-                            List.clear();
-                            approverList.clear();
-                            approverList.add("请选择上级审核人");
-                            op = new OperateByEntity.DetailInfoEntity();
-                            op.setUserid("op10001");
-                            op.setUserName("审核人admin");
-                            List.add(op);
-                            for(int i=0;i<opby.getDetailInfo().size();i++){
-                                String name = opby.getDetailInfo().get(i).getUserName().toString();
-                                String userid = opby.getDetailInfo().get(i).getUserid().toString();
-                                approverList.add(name);
-                                op = new OperateByEntity.DetailInfoEntity();
-                                op.setUserid(userid);
-                                op.setUserName(name);
-                                List.add(op);
+                        try {
+                            Gson gson = new Gson();
+                            OperateByEntity opby = gson.fromJson(result, OperateByEntity.class);
+                            String staval = opby.getStatus().get(0).getStaval();
+                            if ("0".equals(staval)) {
+                                mAppList.add("请选择审核人");
+                                ob = new OperateByEntity.DetailInfoEntity();
+                                ob.setUserid("op10001");
+                                ob.setUserName("审核人");
+                                approverList.add(ob);
+                                ArrayAdapter adapter = new ArrayAdapter(Weekly_Activity.this, android.R.layout.simple_spinner_dropdown_item, mAppList);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spi_approver.setAdapter(adapter);
+                            } else {
+                                JSONArray json = new JSONObject(result).getJSONArray("DetailInfo");
+                                mAppList.add("请选择审核人");
+                                ob = new OperateByEntity.DetailInfoEntity();
+                                ob.setUserid("op10001");
+                                ob.setUserName("审核人");
+                                approverList.add(ob);
+                                for (int i = 0; i < json.length(); i++) {
+                                    JSONObject j = (JSONObject) json.get(i);
+                                    String userid = j.getString("userid");
+                                    String username = j.getString("UserName");
+                                    ob = new OperateByEntity.DetailInfoEntity();
+                                    ob.setUserid(userid);
+                                    ob.setUserName(username);
+                                    approverList.add(ob);
+                                    mAppList.add(username);
+                                }
+
+                                ArrayAdapter adapter = new ArrayAdapter(Weekly_Activity.this, android.R.layout.simple_spinner_dropdown_item, mAppList);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spi_approver.setAdapter(adapter);
                             }
-                            approverAdapter.notifyDataSetChanged();
+                            spi_approver.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    OperateBy = approverList.get((int) id).getUserid();
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        spi_approver.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                OperateBy = List.get((int) id).getUserid();
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
                     }
 
                     @Override
