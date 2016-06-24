@@ -2,6 +2,7 @@ package com.example.hmqqg.hm.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class Daily_Fragment1 extends BaseRequestFragment implements AdapterView.
         date = calendar.get(Calendar.DAY_OF_MONTH);
         time= year + "-" +(month+1) + "-" + date ;
         list.clear();
-        gethttp(REFRESH);
+//        gethttp(REFRESH);
         return view;
     }
 
@@ -71,6 +72,7 @@ public class Daily_Fragment1 extends BaseRequestFragment implements AdapterView.
         lstv.setMode(PullToRefreshBase.Mode.BOTH);
         reportAdapter.notifyDataSetChanged();
         lstv.setAdapter(reportAdapter);
+
         lstv.setOnItemClickListener(this);
         lstv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 
@@ -174,10 +176,13 @@ public class Daily_Fragment1 extends BaseRequestFragment implements AdapterView.
     @Override
     public void onResume() {
         super.onResume();
-        if(!isShow){
-            list.clear();
-            gethttp(REFRESH);
-        }
-        isShow=false;
+        new Handler().postDelayed(new Runnable() {//ViewPager中设置listener,当滑动到该页面时调用onResume方法
+            @Override
+            public void run() {
+                lstv.setRefreshing(true);
+//                gethttp(REFRESH);
+            }
+        }, 500);
     }
+
 }

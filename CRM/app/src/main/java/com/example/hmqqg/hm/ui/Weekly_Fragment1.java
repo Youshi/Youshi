@@ -2,6 +2,7 @@ package com.example.hmqqg.hm.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class Weekly_Fragment1 extends BaseRequestFragment implements AdapterView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.daily_main,container,false);
         initView(view);
-        gethttp(REFRESH);
+//        gethttp(REFRESH);
         return  view;
     }
 
@@ -144,10 +145,12 @@ public class Weekly_Fragment1 extends BaseRequestFragment implements AdapterView
     @Override
     public void onResume() {
         super.onResume();
-        if(!isShow){
-            list.clear();
-            gethttp(REFRESH);
-        }
-        isShow=false;
+        new Handler().postDelayed(new Runnable() {//ViewPager中设置listener,当滑动到该页面时调用onResume方法
+            @Override
+            public void run() {
+                lstv.setRefreshing(true);
+//                gethttp(REFRESH);
+            }
+        }, 500);
     }
 }
