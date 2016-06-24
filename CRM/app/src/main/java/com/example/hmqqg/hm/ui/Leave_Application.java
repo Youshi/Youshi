@@ -29,6 +29,7 @@ import com.example.hmqqg.hm.entity.Apply_Eneity;
 import com.example.hmqqg.hm.entity.CustomerEntity;
 import com.example.hmqqg.hm.entity.OperateByEntity;
 import com.example.hmqqg.hm.entity.SubmitSuperior_Entity;
+import com.example.hmqqg.hm.fragment.ApplyFragment;
 import com.example.hmqqg.hm.util.http.MyCommonCallStringRequest;
 import com.example.hmqqg.hm.view.CustomDialog;
 import com.google.gson.Gson;
@@ -315,8 +316,8 @@ public class Leave_Application extends BaseRequestActivity implements View.OnCli
         String isStaval = ae.getStatus().get(0).getStaval().toString();
         if("1".equals(isStaval)){
             Toast.makeText(Leave_Application.this, "审核成功！", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Leave_Application.this,ApprovalActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(Leave_Application.this,ApprovalActivity.class);
+//            startActivity(intent);
             finish();
         }else if("0".equals(isStaval)){
             Toast.makeText(Leave_Application.this, "审核失败，请稍后重试！", Toast.LENGTH_SHORT).show();

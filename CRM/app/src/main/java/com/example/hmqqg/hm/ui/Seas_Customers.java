@@ -28,7 +28,7 @@ import java.util.List;
 
 
 /**
- * 公海客户
+ * 客户资料
  * Created by Administrator on 2016/2/19.
  */
 public class Seas_Customers extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {

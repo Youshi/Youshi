@@ -2,6 +2,7 @@ package com.example.hmqqg.hm.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,11 @@ import com.example.hmqqg.hm.entity.DailyEntity;
 import com.example.hmqqg.hm.fragment.base.BaseFragment;
 import com.example.hmqqg.hm.fragment.base.BaseRequestFragment;
 import com.example.hmqqg.hm.util.http.MyCommonCallStringRequest;
+import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import org.xutils.common.Callback;
 import org.xutils.http.HttpMethod;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -36,7 +39,7 @@ import de.greenrobot.event.ThreadMode;
  * 外出单审核
  * Created by Administrator on 2016/1/5.
  */
-public class Apply_Fragment extends BaseRequestFragment implements AdapterView.OnItemClickListener{
+public class Apply_Fragment extends BaseFragment implements AdapterView.OnItemClickListener{
     private PullToRefreshListView lstv;
     private List<Apply_Eneity.DetailInfoEntity> list = new ArrayList<>();
     private Applyout_Adapter reportAdapter;
@@ -45,12 +48,14 @@ public class Apply_Fragment extends BaseRequestFragment implements AdapterView.O
     private Integer pageSize = 15;//一页显示几条数据
     private static final int APPEND = 1;
     private static final int REFRESH = 0;
+    private boolean isShow = true;
+    private boolean isResume = true;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.daily_main,container,false);
-        list.clear();
         initView(view);
-        gethttp(REFRESH);
+        list.clear();
+//        gethttp(REFRESH);
         return  view;
     }
 
@@ -106,6 +111,7 @@ public class Apply_Fragment extends BaseRequestFragment implements AdapterView.O
         if (what == REFRESH) {
             startPage = 1;
         }
+        list.clear();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -114,26 +120,39 @@ public class Apply_Fragment extends BaseRequestFragment implements AdapterView.O
                 requestParams.addBodyParameter("Operid", MyApplication.getInstance().getUserInfo().getUserId());
                 requestParams.addBodyParameter("pagenum", String.valueOf(startPage));
                 x.http().request(HttpMethod.POST, requestParams, new MyCommonCallStringRequest(new Apply_Eneity()));
+                x.http().post(requestParams, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Gson gson =new Gson();
+                        Apply_Eneity app =gson.fromJson(result,Apply_Eneity.class);
+                        if("1".equals(app.getStatus().get(0).getStaval())){
+                            list.addAll(app.getDetailInfo());
+                            reportAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
             }
         }).start();
-    }
-    @Subscribe(threadMode = ThreadMode.MainThread)
-    @Override
-    public void onRequestSuccess(Object object) {
-        Apply_Eneity app = (Apply_Eneity) object;
-        if("1".equals(app.getStatus().get(0).getStaval())){
-            list.addAll(app.getDetailInfo());
-            reportAdapter.notifyDataSetChanged();
-        }
-    }
-    @Subscribe(threadMode = ThreadMode.MainThread)
-    @Override
-    public void onRequestError(Throwable ex) {
-        Toast.makeText(getActivity(),R.string.ToastString,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        isResume=false;
         Intent intent = new Intent(getActivity(),Leave_Application.class);
         String appid = String.valueOf(list.get((int) id).getApprovalID());
         String procid = String.valueOf(list.get((int) id).getPROCID());
@@ -158,6 +177,15 @@ public class Apply_Fragment extends BaseRequestFragment implements AdapterView.O
         intent.putExtra("reason",reason);
         startActivity(intent);
     }
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {//ViewPager中设置listener,当滑动到该页面时调用onResume方法
+            @Override
+            public void run() {
+                lstv.setRefreshing(true);
+//                gethttp(REFRESH);
+            }
+        }, 500);
+    }
 }

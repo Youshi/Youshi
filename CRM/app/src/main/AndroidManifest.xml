@@ -200,6 +200,7 @@
         <activity android:name=".ui.HelpActivity" />
         <activity android:name=".ui.personedtils" android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity android:name=".ui.My_ApplyOut_show" />
+        <activity android:name=".ui.VersionActivity" />
         <activity android:name=".ui.Add_Invest_InformationActivity" android:configChanges="orientation|keyboardHidden|screenSize"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <!--<meta-data-->

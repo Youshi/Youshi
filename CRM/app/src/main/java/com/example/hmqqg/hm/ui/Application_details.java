@@ -128,8 +128,8 @@ public class Application_details extends BaseRequestActivity implements View.OnC
         AddjobEntity ae = (AddjobEntity) object;
         if ("1".equals(ae.getStatus().get(0).getStaval())) {
             Toast.makeText(Application_details.this, "审批成功！", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Application_details.this,ApprovalActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(Application_details.this,ApprovalActivity.class);
+//            startActivity(intent);
             finish();
         } else {
             Toast.makeText(Application_details.this, R.string.ToastString, Toast.LENGTH_SHORT).show();

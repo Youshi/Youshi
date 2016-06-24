@@ -2,6 +2,7 @@ package com.example.hmqqg.hm.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +19,14 @@ import com.example.hmqqg.hm.adapter.Approval_adap;
 import com.example.hmqqg.hm.entity.ApplyEntity;
 import com.example.hmqqg.hm.entity.Apply_Eneity;
 import com.example.hmqqg.hm.entity.ApplyresxultEntity;
+import com.example.hmqqg.hm.fragment.base.BaseFragment;
 import com.example.hmqqg.hm.fragment.base.BaseRequestFragment;
 import com.example.hmqqg.hm.util.http.MyCommonCallStringRequest;
+import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import org.xutils.common.Callback;
 import org.xutils.http.HttpMethod;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -37,7 +41,7 @@ import de.greenrobot.event.ThreadMode;
  * 申请结果列表
  * Created by bona on 2016/5/6.
  */
-public class Apply_result extends BaseRequestFragment implements AdapterView.OnItemClickListener{
+public class Apply_result extends BaseFragment implements AdapterView.OnItemClickListener{
     private PullToRefreshListView lstv;
     private Applyresult_Adapter reportAdapter;
     private List<ApplyresxultEntity.DetailInfoEntity> list = new ArrayList<>();
@@ -45,12 +49,13 @@ public class Apply_result extends BaseRequestFragment implements AdapterView.OnI
     private Integer pageSize = 15;
     private static final int APPEND = 1;
     private static final int REFRESH = 0;
+    private boolean isShow = true;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.daily_main,container,false);
         list.clear();
         initView(view);
-        getHttp(REFRESH);
+//        getHttp(REFRESH);
         return  view;
     }
 
@@ -109,25 +114,35 @@ public class Apply_result extends BaseRequestFragment implements AdapterView.OnI
         requestParams.addBodyParameter("pagenum",String.valueOf(startPage));
         requestParams.addBodyParameter("operid", str);
         //CustomerEntity容器需要根据数据来定，暂时没有数据
-        x.http().request(HttpMethod.POST, requestParams, new MyCommonCallStringRequest(new ApplyresxultEntity()));
+        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                ApplyresxultEntity le =  gson.fromJson(result,ApplyresxultEntity.class);
+                if ("1".equals(le.getStatus().get(0).getStaval())){
+                    list.addAll(le.getDetailInfo());
+                    reportAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
 
     }
-    @Subscribe(threadMode = ThreadMode.MainThread)
-    @Override
-    public void onRequestSuccess(Object object) {
-        ApplyresxultEntity app = (ApplyresxultEntity) object;
-        if ("1".equals(app.getStatus().get(0).getStaval())){
-            list.addAll(app.getDetailInfo());
-            reportAdapter.notifyDataSetChanged();
-        }else {
-//            Toast.makeText(getActivity(), "您的网络不稳定，请稍后重试~", Toast.LENGTH_SHORT).show();
-        }
-    }
-    @Subscribe(threadMode = ThreadMode.MainThread)
-    @Override
-    public void onRequestError(Throwable ex) {
-        Toast.makeText(getActivity(), R.string.ToastString, Toast.LENGTH_SHORT).show();
-    }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -190,5 +205,16 @@ public class Apply_result extends BaseRequestFragment implements AdapterView.OnI
             intent.putExtra("name",name);
             startActivity(intent);
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {//ViewPager中设置listener,当滑动到该页面时调用onResume方法
+            @Override
+            public void run() {
+                lstv.setRefreshing(true);
+//                gethttp(REFRESH);
+            }
+        }, 500);
     }
 }

@@ -25,6 +25,7 @@ import com.example.hmqqg.hm.ui.Notice_Activity;
 import com.example.hmqqg.hm.ui.Outalone_Activity;
 import com.example.hmqqg.hm.ui.Person_details;
 import com.example.hmqqg.hm.ui.Remind_Activity;
+import com.example.hmqqg.hm.ui.VersionActivity;
 
 /**
  * 应用
@@ -37,6 +38,7 @@ public class ApplyFragment extends BaseFragment implements View.OnClickListener 
     private ImageView iv_module7;//提醒
     private ImageView iv_module6;//帮助
     private ImageView iv_module11;//市场活动
+    private ImageView iv_module2;//版本信息
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,11 +57,13 @@ public class ApplyFragment extends BaseFragment implements View.OnClickListener 
         iv_module7 = (ImageView) view.findViewById(R.id.iv_module7);
         iv_module6 = (ImageView) view.findViewById(R.id.iv_module6);
         iv_module11 = (ImageView) view.findViewById(R.id.iv_module11);
+        iv_module2 = (ImageView) view.findViewById(R.id.iv_module2);
         iv_module1.setOnClickListener(this);
         iv_module4.setOnClickListener(this);
         iv_module7.setOnClickListener(this);
         iv_module6.setOnClickListener(this);
         iv_module11.setOnClickListener(this);
+        iv_module2.setOnClickListener(this);
     }
 
 
@@ -85,6 +89,10 @@ public class ApplyFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case R.id.iv_module6://帮助
                 intent = new Intent(getActivity(), HelpActivity.class);
+                getActivity().startActivity(intent);
+                break;
+            case R.id.iv_module2://版本信息
+                intent = new Intent(getActivity(), VersionActivity.class);
                 getActivity().startActivity(intent);
                 break;
         }
