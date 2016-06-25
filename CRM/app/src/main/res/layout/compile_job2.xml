@@ -157,9 +157,9 @@
                 <EditText
                     android:id="@+id/condition1"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="内容不得超过50字"
+                    android:hint="内容不得超过500字"
                     android:layout_marginLeft="20dp"
                     android:textSize="14sp"
                     android:gravity="top"
@@ -187,10 +187,10 @@
                 <EditText
                     android:id="@+id/condition2"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
                     android:layout_marginLeft="20dp"
-                    android:hint="内容不得超过50字"
+                    android:hint="内容不得超过500字"
                     android:textSize="14sp"
                     android:gravity="top"
                     />
@@ -217,9 +217,9 @@
                 <EditText
                     android:id="@+id/condition3"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="内容不得超过50字"
+                    android:hint="内容不得超过500字"
                     android:textSize="14sp"
                     android:layout_marginLeft="20dp"
                     android:gravity="top"
