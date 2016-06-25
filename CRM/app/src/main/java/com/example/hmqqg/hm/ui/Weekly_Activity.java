@@ -85,6 +85,7 @@ public class Weekly_Activity extends BaseRequestActivity implements View.OnClick
     private String Scondition3;
     private String Strapprover;
     private String OperateBy;
+    private static int LENGTH=500;
     private ArrayAdapter<String> approverAdapter;//系统默认adapter
     private List<String> mAppList = new ArrayList<String>();;//审核人的列表List
     private List<OperateByEntity.DetailInfoEntity> approverList = new ArrayList<OperateByEntity.DetailInfoEntity>();
@@ -171,21 +172,21 @@ public class Weekly_Activity extends BaseRequestActivity implements View.OnClick
         if("".equals(Scondition1)||Scondition1==null){
             Toast.makeText(Weekly_Activity.this, "回访客户情况不能为空", Toast.LENGTH_SHORT).show();
             return;
-        }else if((Scondition1.length())>50){
+        }else if((Scondition1.length())>LENGTH){
             Toast.makeText(Weekly_Activity.this, "回访客户情况超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
         if("".equals(Scondition2)||Scondition2==null){
             Toast.makeText(Weekly_Activity.this, "关单情况不能为空", Toast.LENGTH_SHORT).show();
             return;
-        }else if((Scondition2.length())>50){
+        }else if((Scondition2.length())>LENGTH){
             Toast.makeText(Weekly_Activity.this, "关单情况超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
         if("".equals(Scondition3)||Scondition3==null){
             Toast.makeText(Weekly_Activity.this, "次日工作安排不能为空", Toast.LENGTH_SHORT).show();
             return;
-        }else if((Scondition3.length())>50){
+        }else if((Scondition3.length())>LENGTH){
             Toast.makeText(Weekly_Activity.this, "次日工作安排超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }

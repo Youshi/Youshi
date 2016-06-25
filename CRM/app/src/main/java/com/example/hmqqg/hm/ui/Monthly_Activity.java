@@ -80,6 +80,7 @@ public class Monthly_Activity extends BaseRequestActivity implements View.OnClic
     private EditText condition2;//关单情况
     private EditText condition3;//下周工作安排
     private Spinner spi_approver;//上级审核人Spinner
+    private static int LENGTH=500;
 
     private int year;
     private int month;
@@ -180,19 +181,19 @@ public class Monthly_Activity extends BaseRequestActivity implements View.OnClic
         Strapprover = spi_approver.getSelectedItem().toString();//获取Spinner的值
         if("".equals(Scondition1)||Scondition1==null){
             Scondition1="";
-        }else if((Scondition1.length())>50){
+        }else if((Scondition1.length())>LENGTH){
             Toast.makeText(Monthly_Activity.this, "回访客户情况超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
         if("".equals(Scondition2)||Scondition2==null){
             Scondition2="";
-        }else if((Scondition2.length())>50){
+        }else if((Scondition2.length())>LENGTH){
             Toast.makeText(Monthly_Activity.this, "关单情况超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
         if("".equals(Scondition3)||Scondition3==null){
             Scondition3="";
-        }else if((Scondition3.length())>50){
+        }else if((Scondition3.length())>LENGTH){
             Toast.makeText(Monthly_Activity.this, "次日工作安排超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }

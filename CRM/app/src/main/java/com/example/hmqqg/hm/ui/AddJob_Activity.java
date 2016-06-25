@@ -93,6 +93,7 @@ public class AddJob_Activity extends BaseRequestActivity implements View.OnClick
     private String Scondition2;
     private String Scondition3;
     private String Strapprover;
+    private static int LENGTH=500;
 
     private List<String> mAppList = new ArrayList<String>();
     private List<OperateByEntity.DetailInfoEntity> List = new ArrayList<OperateByEntity.DetailInfoEntity>();
@@ -177,19 +178,19 @@ public class AddJob_Activity extends BaseRequestActivity implements View.OnClick
         Strapprover = spi_approver.getSelectedItem().toString();//获取Spinner的值
         if("".equals(Scondition1)||Scondition1==null){
             Scondition1="";
-        }else if((Scondition1.length())>50){
+        }else if((Scondition1.length())>LENGTH){
             Toast.makeText(AddJob_Activity.this, "回访客户情况超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
         if("".equals(Scondition2)||Scondition2==null){
             Scondition2="";
-        }else if((Scondition2.length())>50){
+        }else if((Scondition2.length())>LENGTH){
             Toast.makeText(AddJob_Activity.this, "关单情况超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
         if("".equals(Scondition3)||Scondition3==null){
             Scondition3="";
-        }else if((Scondition3.length())>50){
+        }else if((Scondition3.length())>LENGTH){
             Toast.makeText(AddJob_Activity.this, "次日工作安排超过字数限制", Toast.LENGTH_SHORT).show();
             return;
         }
