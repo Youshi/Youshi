@@ -85,10 +85,10 @@ public class LocationActivity extends BaseActivity implements AdapterView.OnItem
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-
+        Intent intent = getIntent();
         SharedPreferences sp = getSharedPreferences("location", MODE_PRIVATE);
-        latitude = Double.parseDouble(sp.getString("latitude", "" + 39.90923));
-        longitude = Double.parseDouble(sp.getString("longitude", "" + 116.397428));
+        latitude = Double.parseDouble(sp.getString("latitude1", "" + 39.90923));
+        longitude = Double.parseDouble(sp.getString("longitude1", "" + 116.397428));
     // 注册 SDK 广播监听者
         IntentFilter iFilter = new IntentFilter();
         iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK);
@@ -124,8 +124,8 @@ public class LocationActivity extends BaseActivity implements AdapterView.OnItem
 
         mCurrentMarker = BitmapDescriptorFactory
                 .fromResource(R.drawable.icon_geo);
-        mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(
-                mCurrentMode, true, mCurrentMarker));
+//        mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(
+//                mCurrentMode, true, mCurrentMarker));
         MapStatus mapStatus = new MapStatus.Builder().zoom(19).build();
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(mapStatus));
         // 开启定位图层

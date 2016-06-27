@@ -81,8 +81,8 @@ public class Sign_in_off_Activity extends BaseRequestActivity
     private String mWay;
     private LocationClient mLocationClient;
     public MyLocationListener mMyLocationListener;
-    private LocationClientOption.LocationMode tempMode = LocationClientOption.LocationMode.Hight_Accuracy;
-    private String tempcoor = "gcj02";
+    private LocationClientOption.LocationMode tempMode = LocationClientOption.LocationMode.Battery_Saving;
+    private String tempcoor = "bd09ll";
     private TextView signOutAddress;
     private TextView signOutTime;
 //    private String timeStartWork = "09:00";//上班时间
@@ -111,6 +111,9 @@ public class Sign_in_off_Activity extends BaseRequestActivity
 
     private Integer startPage = 1;//开始页
     private Integer pageSize = 10;//一页显示几条数据
+
+    private double latitude1;
+    private double longitude1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -423,6 +426,10 @@ public class Sign_in_off_Activity extends BaseRequestActivity
                 break;
             case R.id.back:
 //                Intent intent = new Intent(this,LocationActivity.class);
+//                double latitude1 = latitude;
+//                double longitude1 = longitude;
+//                intent.putExtra("latitude",latitude1);
+//                intent.putExtra("longitude",longitude1);
 //                startActivity(intent);
                 onBackPressed();
                 break;
@@ -502,10 +509,10 @@ public class Sign_in_off_Activity extends BaseRequestActivity
         @Override
         public void onReceiveLocation(BDLocation location) {
             String time = location.getTime();
-            double latitude = location.getLatitude();
-            double longitude = location.getLongitude();
+            latitude1 = location.getLatitude();
+            longitude1 = location.getLongitude();
             SharedPreferences sp = getSharedPreferences("location", MODE_PRIVATE);
-            sp.edit().putString("latitude", "" + latitude).putString("longitude", "" + longitude).commit();
+            sp.edit().putString("latitude1", "" + latitude1).putString("longitude1", "" + longitude1).commit();
 
             //Receive Location
             StringBuffer sb = new StringBuffer(256);
